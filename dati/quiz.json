@@ -1,0 +1,99 @@
+{
+  "nota": "Domande del quiz del momento 02 (testi provvisori, da rivedere), regole dei giudizi e risposte di prova. risposteDiProva sono le risposte del pulsante «Prova con un esempio» (e dei test automatici). provaMomento01 sostituisce le mete salvate finché il momento 01 non le salva davvero.",
+
+  "domande": {
+    "semestre": { "domanda": "Quando parti?", "opzioni": {
+      "primo":   { "chip": "Primo semestre",   "mesi": [9, 10, 11, 12, 1], "meseLuce": 12 },
+      "secondo": { "chip": "Secondo semestre", "mesi": [2, 3, 4, 5, 6],    "meseLuce": 2 }
+    } },
+    "budget": { "domanda": "Quanto puoi spendere al mese, stanza compresa?", "opzioni": {
+      "400-600":    { "chip": "400–600 € al mese",   "max": 600 },
+      "600-800":    { "chip": "600–800 € al mese",   "max": 800 },
+      "800-1000":   { "chip": "800–1.000 € al mese", "max": 1000 },
+      "oltre-1000": { "chip": "Oltre 1.000 € al mese", "max": null }
+    } },
+    "esami": { "domanda": "Quanti esami vuoi farti convalidare al rientro?", "opzioni": {
+      "tutti":            { "chip": "Tutti gli esami" },
+      "la-maggior-parte": { "chip": "La maggior parte degli esami" },
+      "esperienza":       { "chip": "Conta di più l'esperienza", "neutro": true }
+    } },
+    "lingua": { "domanda": "In che lingua vuoi seguire le lezioni?", "opzioni": {
+      "inglese": { "chip": "Solo in inglese",            "vaBene": [4],    "daVerificare": [3] },
+      "misto":   { "chip": "Inglese e lingua del paese", "vaBene": [2, 3], "daVerificare": [1, 4] },
+      "locale":  { "chip": "Nella lingua del paese",     "vaBene": [1, 2], "daVerificare": [3] }
+    } },
+    "dimensione": { "domanda": "In che città ti vedi?", "opzioni": {
+      "piccola": { "chip": "Città piccola" },
+      "media":   { "chip": "Città media" },
+      "grande":  { "chip": "Città grande" }
+    } },
+    "clima": { "domanda": "Che clima cerchi?", "opzioni": {
+      "freddo":       { "chip": "Clima freddo", "min": null, "max": 12 },
+      "mite":         { "chip": "Clima mite",   "min": 12,   "max": 23 },
+      "caldo":        { "chip": "Clima caldo",  "min": 23,   "max": null },
+      "indifferente": { "chip": "Clima indifferente" }
+    } },
+    "attivita": { "domanda": "Cosa vuoi fare nel tempo libero?", "aiuto": "Puoi sceglierne più di una.", "multipla": true, "opzioni": {
+      "mare":    { "chip": "mare",            "presente": "mare",          "assente": "niente mare" },
+      "uscire":  { "chip": "uscire la sera",  "presente": "si esce tanto", "assente": "si esce poco" },
+      "natura":  { "chip": "natura",          "presente": "natura vicina", "assente": "poca natura" },
+      "cultura": { "chip": "cultura", "presente": "tanta cultura", "assente": "poca cultura" }
+    } },
+    "viaggio": { "domanda": "Come vuoi tornare a casa ogni tanto?", "opzioni": {
+      "volo-diretto": { "chip": "Volo diretto" },
+      "treno":        { "chip": "Anche in treno" },
+      "indifferente": { "chip": "Come capita" }
+    } }
+  },
+  "ordine": ["semestre", "budget", "esami", "lingua", "dimensione", "clima", "attivita", "viaggio"],
+
+  "regole": {
+    "simboli": { "si": "✓", "medio": "~", "no": "✕" },
+    "punti":   { "si": 2, "medio": 1, "no": 0 },
+    "costo":   { "tolleranzaAlLimite": 100, "si": "Dentro il tuo budget", "medio": "Al limite", "no": "Fuori dal tuo budget" },
+    "lezioni": { "si": "Va bene per te", "medio": "Da verificare", "no": "Non è quello che cerchi" },
+    "esami": [
+      { "da": 9, "testo": "Ottimo",      "giudizio": "si" },
+      { "da": 7, "testo": "Buono",       "giudizio": "si" },
+      { "da": 5, "testo": "Nella media", "giudizio": "medio" },
+      { "da": 0, "testo": "Difficile",   "giudizio": "no" }
+    ],
+    "vita":    { "si": "Come vuoi tu", "medio": "In parte", "no": "Poco adatta" },
+    "livelli": [
+      { "da": 0.85, "testo": "Molto in linea",    "classe": "" },
+      { "da": 0.6,  "testo": "In parte in linea", "classe": "medio" },
+      { "da": 0,    "testo": "Poco in linea",     "classe": "basso" }
+    ],
+    "breve": { "maxParole": 15, "maxForti": 2, "maxFortiSenzaDeboli": 3, "maxDeboli": 2 },
+    "frasiGeneriche": {
+      "costo":   { "si": "rientra nel budget", "medio": "è al limite del budget", "no": "supera il budget" },
+      "lezioni": { "si": "lezioni adatte a te", "medio": "lezioni da verificare", "no": "lezioni non adatte" },
+      "esami":   { "si": "riconosce bene gli esami", "medio": "esami nella media", "no": "esami difficili da convalidare" },
+      "vita":    { "si": "vita come la vuoi", "medio": "vita solo in parte come la vuoi", "no": "vita poco adatta" },
+      "clima":   { "si": "clima come lo cerchi", "no": "clima diverso da quello che cerchi" }
+    }
+  },
+
+  "schede": {
+    "nota": "Testi delle schede dei risultati. Stessi nomi delle voci in tutte le schede, consigliata compresa.",
+    "esiti": {
+      "si":     { "testo": "Sì",                 "classe": "si" },
+      "medio":  { "testo": "In parte",           "classe": "parte" },
+      "no":     { "testo": "No",                 "classe": "no" },
+      "neutro": { "testo": "Non è una priorità", "classe": "neutro" }
+    },
+    "perTe": "Per te:",
+    "voci": { "costo": "Budget", "lezioni": "Lingua delle lezioni", "esami": "Esami riconosciuti", "vita": "Tempo libero" },
+    "livelloConsigliata": "{livello} con te",
+    "perche": "Non era tra le tue mete, ma è quella che somiglia di più all'Erasmus che hai descritto.",
+    "apri": "Apri",
+    "legenda": "Clicca una meta per tutti i dettagli",
+    "listaVuota": "Tocca il cuore su una meta"
+  },
+
+  "risposteDiProva": {
+    "semestre": "primo", "budget": "600-800", "esami": "tutti", "lingua": "misto",
+    "dimensione": "media", "clima": "mite", "attivita": ["mare", "uscire"], "viaggio": "volo-diretto"
+  },
+  "provaMomento01": { "partenza": "Torino", "meteSalvate": ["lisbona", "praga", "berlino"] }
+}

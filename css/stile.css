@@ -1,0 +1,433 @@
+/* =========================================================
+   HANDOVER — stile comune delle pagine del percorso
+   ("Dove posso andare?", "Quale fa per me?", pagina della città).
+   Per cambiare lo stile basta modificare le variabili qui sotto.
+   Ordine del file: variabili → base e testata → momento 01 → momento 02 → pagina città.
+   ========================================================= */
+
+:root {
+  /* ——— Colori (stessi nomi di index.html, la home) ——— */
+  --bianco: #FFFFFF;
+  --nero: #0B0B0C;
+  --grigio-testo: #5F5F66;          /* testi secondari */
+  --grigio-testata: #2A2A30;        /* testi sulla testata colorata della scheda città */
+  --grigio-bordo: #E2E2E6;          /* linee e bordi */
+  --grigio-terra: #ECECEF;          /* paesi sulla mappa, sfondi neutri */
+  --grigio-terra-erasmus: #DCDCE2;  /* paesi del programma Erasmus+ */
+  --grigio-casa: #C9C9D1;           /* il tuo paese sulla mappa */
+  --grigio-tenue: #F6F6F8;          /* sfondi leggerissimi: pillole delle risposte, fondo delle schede, righe sotto il mouse */
+  --bianco-cuore: rgba(255, 255, 255, .85);   /* fondo del cuore delle preferite, sopra la bandiera */
+  --blu: #2F55E4;                   /* colore d'accento: selezione, rotte, dati raccontati */
+  --blu-chiaro: #E8EDFD;            /* sfondo di ciò che è selezionato */
+  --blu-paese: #C9D3F8;             /* paese sotto il mouse o selezionato */
+  --verde: #1F7A4D;                 /* giudizio positivo ✓ */
+  --rosso: #B4352B;                 /* giudizio negativo ✕ */
+
+  /* ——— Carattere ——— */
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* ——— Grandezze del testo ——— */
+  --testo-titolo: 104px;   /* titolo della pagina ("Dove posso andare?"); i risultati lo riducono a 88px */
+  --margini-titolo: 80px 0 28px;
+  --testo-meta-grande: 68px; /* nome della città nella pagina della città */
+  --testo-consigliata: 64px; /* nome della meta consigliata */
+  --riga-luogo: 18px;        /* altezza della riga "paese · università" nelle schede del confronto (come prima) */
+  --testo-5xl: 56px;       /* "Tutte le mete", "N mete per te" */
+  --testo-4xl: 44px;       /* titolo della scheda a destra */
+  --testo-sezione: 40px;   /* titoli delle sezioni dei risultati */
+  --testo-meta: 36px;      /* nome della meta nelle schede del confronto */
+  --testo-3xl: 24px;       /* riepilogo, città nell'elenco */
+  --testo-lista: 22px;     /* elenco delle preferite */
+  --testo-2xl: 20px;       /* frecce ← → */
+  --testo-xl: 18px;        /* passi, campi di ricerca */
+  --testo-l: 17px;
+  --testo-ml: 16px;
+  --testo-m: 15px;
+  --testo-s: 14px;
+  --testo-xs: 13px;
+  --testo-2xs: 12px;       /* etichette e intestazioni in maiuscolo */
+
+  /* ——— Forme ——— */
+  --raggio-grande: 24px;   /* meta consigliata */
+  --raggio: 20px;          /* mappa e schede */
+  --raggio-pillola: 999px; /* pulsanti tondi */
+  --raggio-piccolo: 6px;   /* etichette sulla mappa */
+  --raggio-mini: 3px;
+
+  /* ——— Ombre ——— */
+  --ombra: 0 6px 24px rgba(15, 15, 20, .08);
+  --ombra-scheda: 0 10px 40px rgba(15, 15, 20, .10);
+  --ombra-etichetta: 0 2px 8px rgba(15, 15, 20, .1);
+
+  /* ——— Misure della pagina ——— */
+  --larghezza-pagina: 1320px;
+  --margini-pagina: 48px 56px 96px;
+  --altezza-area: clamp(620px, calc(100vh - 220px), 820px);   /* altezza comune di mappa e scheda */
+  --quota-mappa: 64fr;               /* la mappa prende circa il 64% della larghezza… */
+  --quota-scheda: 36fr;              /* …la scheda circa il 36% */
+  --larghezza-scheda-min: 420px;     /* la scheda non scende mai sotto questa larghezza */
+  --spazio-area: 24px;               /* spazio tra mappa e scheda */
+  --larghezza-linguetta: 40px;       /* scheda chiusa: resta solo la linguetta */
+  --spazio-linguetta: 12px;          /* spazio tra mappa e linguetta */
+  --bordo-riquadro: 1px solid var(--grigio-bordo);   /* stesso bordo per mappa e scheda */
+  --area-tocco: 32px;                /* area cliccabile minima di ogni puntino */
+  --dim-chiudi: 44px;                /* pulsante tondo × della scheda */
+  --margini-scheda: 24px 28px 20px;  /* spazi interni della scheda (alto, lati, basso) */
+
+  /* ——— Scheda della città ——— */
+  --testo-citta: 36px;               /* nome della città nella testata */
+  --testo-numero: 28px;              /* numeri grandi della griglia 2×2 */
+  --testo-numero-parole: 17px;       /* valori a parole nella griglia (es. "Quasi solo in spagnolo") */
+  --raggio-griglia: 14px;
+  --colonne-elenco: minmax(0, 1.6fr) minmax(0, 2fr) 110px 100px 110px 110px 24px;
+
+  /* ——— Movimento ——— */
+  --durata-rotta: .7s;
+  --molla: cubic-bezier(.34, 1.56, .64, 1);   /* movimento con un piccolo rimbalzo (quiz) */
+  --testo-domanda: 56px;             /* la domanda del quiz */
+  --larghezza-quiz: 880px;           /* larghezza massima di inizio e quiz */
+}
+
+/* ——— Base ——— */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--bianco); color: var(--nero); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+/* La pagina riempie almeno tutta la finestra: così il piè di pagina sta sempre in fondo, anche nelle pagine corte */
+body { display: flex; flex-direction: column; min-height: 100vh; }
+.pagina { flex: 1 0 auto; width: 100%; max-width: var(--larghezza-pagina); margin: 0 auto; padding: var(--margini-pagina); }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid var(--blu); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }  /* testo solo per lettori di schermo */
+
+/* ——— Barra dei momenti: logo + i 6 momenti (la disegna js/navigazione.js, uguale in tutte le pagine) ——— */
+#barra-momenti { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.logo { font-weight: 700; letter-spacing: .18em; font-size: var(--testo-m); text-decoration: none; color: var(--nero); }
+.tappe { display: flex; gap: 8px; flex-wrap: wrap; list-style: none; margin: 0; padding: 0; }
+.tappe li { display: flex; }   /* così ogni link è un blocco e la pillola ha la sua altezza piena */
+.tappa { font-size: var(--testo-xs); padding: 8px 14px; border-radius: var(--raggio-pillola); box-shadow: var(--ombra); color: var(--grigio-testo); text-decoration: none; background: var(--bianco); }
+.tappa.attiva { background: var(--nero); color: var(--bianco); }
+
+h1 { font-size: var(--testo-titolo); line-height: .95; letter-spacing: -.045em; font-weight: 700; margin: var(--margini-titolo); }
+
+/* Nomi di paese e università sulle testate colorate (momento 01, momento 02, pagina città) */
+.paesetto { font-size: var(--testo-2xs); letter-spacing: .08em; color: var(--grigio-testata); font-weight: 700; }
+.uni { font-size: var(--testo-s); color: var(--grigio-testata); margin: 0; }
+
+/* Pulsante principale: pillola nera con freccia */
+.vai { display: inline-flex; align-items: center; justify-content: center; text-align: center; gap: 10px; background: var(--nero); color: var(--bianco); text-decoration: none;
+       font: inherit; font-size: var(--testo-ml); padding: 16px 26px; border-radius: var(--raggio-pillola); border: 0; cursor: pointer; }
+.vai:hover { background: var(--blu); }
+.vai:disabled, .vai[aria-disabled="true"] { background: var(--grigio-terra); color: var(--grigio-testo); cursor: not-allowed; }
+.vai[aria-disabled="true"] { pointer-events: none; }
+
+/* Nota in fondo alla pagina */
+.nota { margin-top: 48px; font-size: var(--testo-xs); color: var(--grigio-testo); }
+
+/* Link di testo in grassetto ("← Torna ai risultati", "← Torna a Quale fa per me?") */
+.scopri { font-size: var(--testo-m); font-weight: 700; color: var(--nero); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
+.scopri:hover { color: var(--blu); }
+
+/* ——— Passi (paese → università → corso) e riepilogo ——— */
+.passi { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; font-size: var(--testo-xl); color: var(--grigio-testo); min-height: 52px; }
+.passo { display: inline-flex; align-items: center; gap: 10px; padding: 10px 18px; border-radius: var(--raggio-pillola); background: var(--bianco); box-shadow: var(--ombra); }
+.passo .n { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: var(--testo-2xs); font-weight: 700; background: var(--grigio-terra); color: var(--grigio-testo); }
+.passo.ora { color: var(--nero); }
+.passo.ora .n { background: var(--nero); color: var(--bianco); }
+.passo.fatto .n { background: var(--blu); color: var(--bianco); }
+.riepilogo { font-size: var(--testo-3xl); color: var(--grigio-testo); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.riepilogo b { color: var(--nero); }
+.cambia { font: inherit; font-size: var(--testo-m); border: 0; border-radius: var(--raggio-pillola); padding: 10px 16px; background: var(--bianco); box-shadow: var(--ombra); cursor: pointer; min-height: 44px; }
+.errore { font-size: var(--testo-xl); line-height: 1.5; color: var(--nero); max-width: 720px; }
+.errore code { font-size: var(--testo-m); background: var(--grigio-terra); padding: 2px 6px; border-radius: var(--raggio-piccolo); }
+
+/* ——— Area: mappa a sinistra (~64%), scheda a destra (~36%, min 420px) ———
+   Stessa riga della griglia: partono e finiscono alla stessa linea, con lo stesso bordo e raggio.
+   Se la scheda chiude, la mappa si allarga e mostra più territorio. */
+.area { display: grid; grid-template-columns: minmax(0, var(--quota-mappa)) minmax(var(--larghezza-scheda-min), var(--quota-scheda));
+        grid-template-rows: var(--altezza-area); gap: var(--spazio-area); margin-top: 40px; }
+.area.chiusa { grid-template-columns: minmax(0, 1fr) var(--larghezza-linguetta); gap: var(--spazio-linguetta); }
+.tela { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0; border: var(--bordo-riquadro); border-radius: var(--raggio); overflow: hidden; background: var(--bianco); }
+
+/* ——— Mappa ——— */
+.quadro { position: relative; flex: 1; min-height: 0; overflow: hidden; cursor: grab; }
+.quadro:active { cursor: grabbing; }
+.quadro:focus-visible { outline: 3px solid var(--blu); outline-offset: -3px; }
+.quadro svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.paese { fill: var(--grigio-terra); stroke: var(--bianco); stroke-width: .8; vector-effect: non-scaling-stroke; transition: fill .2s; }
+.paese.erasmus { fill: var(--grigio-terra-erasmus); }
+.paese.cliccabile { cursor: pointer; }
+.paese.cliccabile:hover { fill: var(--blu-paese); }
+.paese.casa { fill: var(--grigio-casa); }
+.paese.attivo { fill: var(--blu-paese); }
+/* Rotte: disegnate in pixel dello schermo, quindi restano sottili a ogni zoom.
+   pathLength="1" (nel codice) permette di animarle senza conoscerne la lunghezza. */
+.rotta { fill: none; stroke: var(--blu); stroke-width: 2; stroke-linecap: round; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.rotta.visibile { opacity: 1; }
+.rotta.anteprima { opacity: .35; }
+@media (prefers-reduced-motion: no-preference) {
+  .rotta.visibile { stroke-dasharray: 1; stroke-dashoffset: 1; animation: traccia var(--durata-rotta) ease forwards; }
+  @keyframes traccia { to { stroke-dashoffset: 0; } }
+}
+
+/* ——— Puntini sulla mappa ———
+   Il pulsante è un quadrato di almeno 32px centrato esattamente sulla città, con il pallino nel mezzo.
+   L'etichetta sta fuori dal quadrato, a destra: così il pallino resta sulla città anche quando il nome compare.
+   I puntini sono fuori dal disegno zoomato: seguono la mappa ma restano della stessa grandezza. */
+.segnaposti { position: absolute; inset: 0; pointer-events: none; }
+.pin { position: absolute; width: var(--area-tocco); height: var(--area-tocco); transform: translate(-50%, -50%); display: flex; align-items: center; justify-content: center;
+       pointer-events: auto; border: 0; background: transparent; padding: 0; font: inherit; cursor: pointer; }
+.pin .punto { width: var(--dim); height: var(--dim); border-radius: 50%; background: var(--nero); box-shadow: 0 0 0 2px var(--bianco); transition: transform .15s, background .15s; flex: none; }
+.pin .etichetta { position: absolute; top: 50%; left: calc(50% + var(--dim) / 2 + 6px); transform: translateY(-50%); white-space: nowrap;
+                  font-size: var(--testo-2xs); font-weight: 700; background: var(--bianco); padding: 3px 7px; border-radius: var(--raggio-piccolo); box-shadow: var(--ombra-etichetta); display: none; }
+/* Il nome si vede: al passaggio del mouse, oppure quando il codice decide che c'è posto (classe "nome") */
+.pin.nome .etichetta, .pin:hover .etichetta { display: block; }
+.pin.misura .etichetta { display: block; visibility: hidden; }   /* solo per misurare l'etichetta, invisibile */
+.pin:hover { z-index: 2; }
+.pin:hover .punto { transform: scale(1.3); background: var(--blu); }
+.pin.sel { z-index: 1; }
+.pin.sel .punto { background: var(--blu); transform: scale(1.5); }
+.pin.sel .etichetta { background: var(--blu); color: var(--bianco); }
+.pin.casa .punto { border: 3px solid var(--nero); background: var(--bianco); }
+.pin.casa .etichetta { font-weight: 400; }
+
+/* ——— Pulsanti della mappa: +, −, Centra ——— */
+.controlli { position: absolute; right: 16px; bottom: 16px; z-index: 4; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.controllo { font: inherit; font-size: var(--testo-2xl); line-height: 1; min-width: 44px; height: 44px; padding: 0; border: 0; border-radius: var(--raggio-pillola);
+             background: var(--bianco); color: var(--nero); box-shadow: var(--ombra); cursor: pointer; }
+.controllo:hover { background: var(--grigio-tenue); }
+.controllo.centra { font-size: var(--testo-s); padding: 0 16px; }
+
+/* ——— Legenda: pillola bianca dentro la mappa, in basso a sinistra ——— */
+.legenda { position: absolute; left: 16px; bottom: 16px; z-index: 4; display: flex; flex-wrap: wrap; gap: 16px; max-width: calc(100% - 140px);
+           padding: 10px 16px; border-radius: var(--raggio-pillola); background: var(--bianco); box-shadow: var(--ombra);
+           font-size: var(--testo-xs); color: var(--grigio-testo); pointer-events: none; }
+.legenda span { display: inline-flex; align-items: center; gap: 8px; }
+.l-meta { width: 12px; height: 12px; border-radius: 50%; background: var(--nero); }
+.l-casa { width: 14px; height: 14px; border-radius: 50%; border: 3px solid var(--nero); }
+.l-er { width: 14px; height: 10px; border-radius: var(--raggio-mini); background: var(--grigio-terra-erasmus); }
+
+/* ——— Scheda a destra ———
+   Una colonna alta quanto la mappa che NON scorre mai: il contenuto sta in alto,
+   ciò che deve stare in fondo (pulsanti, nota) è spinto alla base. */
+.colonna { position: relative; display: flex; flex-direction: column; min-width: 0; min-height: 0; background: var(--bianco); border: var(--bordo-riquadro); border-radius: var(--raggio); overflow: hidden; }
+.area.chiusa .colonna { display: none; }
+/* × tondo in alto a destra (sulla scheda città sta dentro la testata colorata) */
+.chiudi-scheda { position: absolute; top: 14px; right: 14px; z-index: 2; width: var(--dim-chiudi); height: var(--dim-chiudi); padding: 0; border: 0; border-radius: 50%;
+                 display: flex; align-items: center; justify-content: center; font: inherit; font-size: 24px; line-height: 1;
+                 background: var(--bianco); color: var(--nero); box-shadow: var(--ombra); cursor: pointer; }
+.chiudi-scheda:hover { background: var(--grigio-tenue); }
+/* Scheda chiusa: una linguetta sottile sul bordo destro */
+.linguetta { display: none; }
+.area.chiusa .linguetta { display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; font: inherit; font-size: var(--testo-xs);
+                          color: var(--grigio-testo); border: var(--bordo-riquadro); padding: 0; border-radius: var(--raggio-pillola); background: var(--bianco); cursor: pointer; }
+.area.chiusa .linguetta:hover { color: var(--nero); }
+
+.box { flex: 1; min-height: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--bianco); padding: var(--margini-scheda); }
+.box:focus { outline: none; }
+.box .torna { align-self: flex-start; font: inherit; font-size: var(--testo-s); border: 0; background: none; color: var(--grigio-testo); padding: 0; margin-bottom: 14px; cursor: pointer; min-height: 32px; }
+.box .torna:hover { color: var(--nero); }
+.box h2 { font-size: var(--testo-4xl); letter-spacing: -.04em; margin: 0; line-height: 1.02; }
+.box .sotto { color: var(--grigio-testo); font-size: var(--testo-ml); line-height: 1.5; margin: 12px 0 20px; }
+.campo { width: 100%; font: inherit; font-size: var(--testo-xl); border: 0; border-radius: var(--raggio-pillola); box-shadow: var(--ombra); padding: 14px 20px; background: var(--bianco); color: var(--nero); appearance: none; -webkit-appearance: none; }
+/* L'elenco delle università occupa lo spazio libero della scheda; se è lungo scorre solo l'elenco */
+.scelte { flex: 1 1 auto; min-height: 0; list-style: none; margin: 14px 0 0; padding: 0; overflow: auto; }
+.scelte button { all: unset; box-sizing: border-box; width: 100%; display: block; padding: 12px 6px; border-bottom: 1px solid var(--grigio-bordo); cursor: pointer; }
+.scelte button:hover, .scelte button.sel { background: var(--blu-chiaro); }
+.scelte button:focus-visible { outline: 3px solid var(--blu); outline-offset: -3px; }
+.scelte .u { font-size: var(--testo-l); font-weight: 700; display: block; }
+.scelte .cc { font-size: var(--testo-xs); color: var(--grigio-testo); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips button { font: inherit; font-size: var(--testo-m); border: 0; border-radius: var(--raggio-pillola); padding: 11px 16px; background: var(--bianco); box-shadow: var(--ombra); cursor: pointer; min-height: 44px; }
+.chips button[aria-pressed="true"] { background: var(--nero); color: var(--bianco); }
+.box .vai { width: 100%; margin-top: 22px; padding: 16px 24px; }   /* nella scheda del momento 01 il pulsante è largo quanto la scheda */
+.vuoto .grande { font-size: var(--testo-5xl); font-weight: 700; letter-spacing: -.04em; line-height: 1; }
+.vuoto p { color: var(--grigio-testo); font-size: var(--testo-l); line-height: 1.5; margin: 14px 0 0; }
+/* Nota fissa in fondo alle schede iniziali */
+.nota-scheda { margin: auto 0 0; padding-top: 14px; border-top: 1px solid var(--grigio-bordo); font-size: var(--testo-xs); line-height: 1.45; color: var(--grigio-testo); }
+.scelte + .nota-scheda { margin-top: 14px; }
+
+/* ——— Scheda della città ———
+   Tre parti: testata (in alto), corpo con la griglia 2×2 e le etichette, piede con i pulsanti (in fondo). */
+.box.citta { padding: 0; }
+.testata { flex: none; padding: 20px 72px 16px 28px; background: linear-gradient(120deg, var(--f1), var(--f2) 55%, var(--f3)); }
+.testata h2 { margin-top: 6px; font-size: var(--testo-citta); }
+.testata .uni { margin: 6px 0 0; line-height: 1.35; }
+.testata .dist { color: var(--grigio-testata); font-size: var(--testo-xs); margin: 4px 0 0; }
+
+.citta .corpo { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 14px; padding: 18px 28px 0; }
+/* Griglia 2×2: etichetta piccola, numero grande, fonte piccola */
+.dati { display: grid; grid-template-columns: 1fr 1fr; border: var(--bordo-riquadro); border-radius: var(--raggio-griglia); overflow: hidden; }
+.dato { display: flex; flex-direction: column; gap: 3px; padding: 12px 14px; min-width: 0; }
+.dato:nth-child(odd) { border-right: var(--bordo-riquadro); }
+.dato:nth-child(-n+2) { border-bottom: var(--bordo-riquadro); }
+.dato-nome { font-size: var(--testo-2xs); font-weight: 700; color: var(--grigio-testo); }
+.dato-valore { font-size: var(--testo-numero); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; }
+.dato-valore.parole { font-size: var(--testo-numero-parole); letter-spacing: 0; line-height: 1.25; }
+.dato-valore.raccontato { color: var(--blu); }                     /* blu = viene dai racconti degli studenti */
+.dato-fonte { font-size: var(--testo-2xs); line-height: 1.35; color: var(--grigio-testo); }
+.vita { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { display: inline-block; font-size: var(--testo-xs); padding: 5px 10px; border-radius: var(--raggio-pillola); background: var(--grigio-terra); }
+
+.piede { flex: none; padding: 14px 28px 18px; }
+.piede .vai { margin-top: 0; }
+.naviga { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: var(--testo-xs); color: var(--grigio-testo); }
+.naviga button { font: inherit; font-size: var(--testo-2xl); border: 0; background: var(--bianco); box-shadow: var(--ombra); border-radius: 50%; width: 44px; height: 44px; cursor: pointer; }
+
+/* ——— Elenco ordinabile delle mete ——— */
+.elenco { margin-top: 96px; }
+.elenco-testa { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; }
+.elenco h2 { font-size: var(--testo-5xl); letter-spacing: -.04em; margin: 0; line-height: 1; }
+.ordina { display: flex; gap: 8px; flex-wrap: wrap; }
+.ordina button { font: inherit; font-size: var(--testo-s); border: 0; border-radius: var(--raggio-pillola); padding: 10px 16px; min-height: 40px; background: var(--bianco); box-shadow: var(--ombra); color: var(--grigio-testo); cursor: pointer; }
+.ordina button[aria-pressed="true"] { background: var(--nero); color: var(--bianco); }
+.tabella { list-style: none; margin: 28px 0 0; padding: 0; border-top: 2px solid var(--nero); }
+.tabella .intest { display: grid; grid-template-columns: var(--colonne-elenco); gap: 20px; align-items: baseline; font-size: var(--testo-2xs); letter-spacing: .06em; color: var(--grigio-testo); border-bottom: 1px solid var(--grigio-bordo); padding: 12px 8px; }
+.tabella button { all: unset; box-sizing: border-box; width: 100%; display: grid; grid-template-columns: var(--colonne-elenco); gap: 20px; align-items: baseline; padding: 18px 8px; border-bottom: 1px solid var(--grigio-bordo); cursor: pointer; }
+.tabella button:hover { background: var(--grigio-tenue); }
+.tabella button.sel { background: var(--blu-chiaro); }
+.tabella button:focus-visible { outline: 3px solid var(--blu); outline-offset: -3px; }
+.tabella .c { font-size: var(--testo-3xl); font-weight: 700; letter-spacing: -.02em; }
+.tabella .d { font-size: var(--testo-m); color: var(--grigio-testo); }
+.attesa { color: var(--grigio-testo); font-size: var(--testo-l); margin-top: 24px; }
+
+
+/* =========================================================
+   MOMENTO 02 — "Quale fa per me?": pagina dei risultati
+   (il riferimento è la pagina stessa; il vecchio riferimento statico è in riferimenti/)
+   ========================================================= */
+.risultati { --testo-titolo: 88px; --margini-titolo: 72px 0 24px; }   /* stesso titolo del momento 01, più piccolo */
+
+/* Le tue risposte, in pillole */
+.profilo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.chip { font-size: var(--testo-s); background: var(--grigio-tenue); border-radius: var(--raggio-pillola); padding: 8px 13px; }
+.modifica { font: inherit; font-size: var(--testo-s); background: var(--bianco); box-shadow: var(--ombra); border: 0; border-radius: var(--raggio-pillola); padding: 8px 14px; color: var(--nero); text-decoration: none; cursor: pointer; }
+
+/* Sezioni */
+.sez { margin-top: 64px; }
+.occhiello { font-size: var(--testo-2xs); letter-spacing: .08em; font-weight: 700; color: var(--grigio-testo); margin: 0 0 12px; }   /* titoletto sopra il titolo */
+.risultati h2 { font-size: var(--testo-sezione); letter-spacing: -.035em; margin: 0 0 24px; line-height: 1.02; }
+
+/* ——— Le schede delle mete ———
+   Un solo sistema per tutte: testata con la bandiera (paese · università, città, livello), quattro voci con l'esito,
+   una riga di fondo (costo e temperatura), il cuore per le preferite. Tre grandezze di testo in tutto.
+   Tutta la scheda è cliccabile: il link sul nome della città si allarga (::after) a coprire la scheda;
+   il cuore sta sopra (z-index) e quindi non apre la pagina. */
+.scheda { position: relative; border-radius: var(--raggio); overflow: hidden; box-shadow: inset 0 0 0 1px var(--grigio-bordo); background: var(--bianco);
+          display: flex; flex-direction: column; }
+@media (prefers-reduced-motion: no-preference) {
+  .scheda { transition: box-shadow .15s, transform .15s; }
+  .scheda:hover { transform: translateY(-2px); }
+}
+.scheda:hover { box-shadow: inset 0 0 0 1px var(--grigio-bordo), var(--ombra-scheda); }
+.scheda .testa { padding: 22px 24px 20px; background: linear-gradient(120deg, var(--f1), var(--f2) 55%, var(--f3)); }
+/* "Spagna · Universitat de València": sempre su una riga. Se non ci sta, finisce con "…" (il nome completo va nel title,
+   lo mette il codice). A destra lascia libero lo spazio del cuore. */
+.luogo { display: block; font-size: var(--testo-xs); line-height: var(--riga-luogo); color: var(--grigio-testata);
+         white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: var(--dim-chiudi); }
+.scheda h3 { font-size: var(--testo-meta); letter-spacing: -.035em; line-height: 1; margin: 6px 0 0; }
+.scheda h3 a { color: inherit; text-decoration: none; }
+.scheda h3 a::after { content: ""; position: absolute; inset: 0; }                      /* tutta la scheda diventa il link */
+.livello { font-size: var(--testo-ml); font-weight: 700; margin: 14px 0 0; color: var(--grigio-testata); }
+.scheda .corpo { padding: 8px 24px 0; }
+.voci { list-style: none; margin: 0; padding: 0; }
+.voci li { display: flex; justify-content: space-between; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--grigio-bordo); font-size: var(--testo-ml); }
+.voci li:last-child { border-bottom: 0; }
+
+/* L'esito: colore E forma diversi, così si distingue anche senza vedere i colori */
+.esito { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
+.esito i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+.esito.si { color: var(--verde); }       .esito.si i { background: var(--verde); }                                              /* ● pallino pieno */
+.esito.parte { color: var(--grigio-testo); } .esito.parte i { background: transparent; box-shadow: inset 0 0 0 2px var(--grigio-testo); } /* ○ cerchio vuoto */
+.esito.no { color: var(--rosso); }       .esito.no i { background: var(--rosso); border-radius: 2px; }                          /* ■ quadrato */
+.esito.neutro { color: var(--grigio-testo); } .esito.neutro i { height: 2px; border-radius: 1px; background: var(--grigio-testo); }    /* – lineetta: "Non è una priorità" */
+
+.piede { margin-top: auto; padding: 14px 24px 18px; background: var(--grigio-tenue); display: flex; justify-content: space-between; align-items: center;
+         font-size: var(--testo-xs); color: var(--grigio-testo); }
+.piede b { color: var(--nero); font-size: var(--testo-ml); }
+.apri { font-weight: 700; color: var(--nero); }
+.cuore { position: absolute; top: 16px; right: 16px; z-index: 2; width: var(--dim-chiudi); height: var(--dim-chiudi); border-radius: 50%; border: 0;
+         background: var(--bianco-cuore); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.cuore svg { width: 20px; height: 20px; fill: none; stroke: var(--nero); stroke-width: 2; }
+.cuore[aria-pressed="true"] svg { fill: var(--nero); }
+
+/* Meta consigliata: la stessa scheda, solo più larga (bandiera a sinistra, voci a destra) */
+.consigliata { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); }
+.consigliata .testa { padding: 32px; display: flex; flex-direction: column; }
+.consigliata .luogo { line-height: normal; }                                            /* qui la riga è più stretta, come prima */
+.consigliata h3 { font-size: var(--testo-consigliata); }
+.consigliata .perche { margin-top: auto; padding-top: 28px; font-size: var(--testo-ml); line-height: 1.45; color: var(--grigio-testata); max-width: 360px; }
+.consigliata .destra { display: flex; flex-direction: column; }
+.consigliata .corpo { padding: 16px 32px 0; }
+.consigliata .piede { padding: 16px 32px 20px; }
+.consigliata .cuore { right: auto; left: calc(100% / 2.3 - 60px); top: 24px; }          /* in alto a destra della bandiera (colonne 1 : 1,3) */
+
+/* Confronto: tre schede affiancate. Il codice pareggia le altezze di testata e voci,
+   così le righe restano allineate anche se un testo va a capo. */
+.griglia { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.legenda-esiti { display: flex; gap: 20px; font-size: var(--testo-xs); color: var(--grigio-testo); margin: -8px 0 20px; }   /* "● Sì ○ In parte ■ No" sopra le schede (.legenda è quella della mappa del momento 01) */
+
+/* Le tue preferite */
+.barra { margin-top: 64px; border-top: 2px solid var(--nero); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+.barra .occhiello { margin: 0 0 6px; }
+.barra .lista { font-size: var(--testo-lista); font-weight: 700; letter-spacing: -.02em; margin: 0; }
+
+
+/* ——— Il quiz: schermata iniziale, domande, messaggio d'errore ——— */
+[tabindex="-1"]:focus { outline: none; }   /* titoli che ricevono il cursore dal codice: niente riquadro blu */
+#inizio, .quiz, #errore { max-width: var(--larghezza-quiz); }
+.presenta { font-size: var(--testo-3xl); line-height: 1.4; color: var(--grigio-testo); margin: 0 0 40px; }
+.quiz { margin-top: 72px; }
+.avanzamento { height: 4px; border-radius: var(--raggio-pillola); background: var(--grigio-terra); overflow: hidden; margin: 0 0 40px; }
+.avanzamento span { display: block; height: 100%; width: 0; background: var(--nero); border-radius: inherit; }
+.quiz fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.quiz legend { padding: 0; margin: 0 0 28px; font-size: var(--testo-domanda); font-weight: 700; letter-spacing: -.035em; line-height: 1.02; }
+.aiuto { margin: -12px 0 24px; font-size: var(--testo-l); color: var(--grigio-testo); }
+.opzioni { display: flex; flex-wrap: wrap; gap: 10px; }
+.opzione { position: relative; display: inline-flex; }
+/* Il vero pulsante di scelta (radio o casella) resta, invisibile, sopra la pillola: si usa con mouse, tastiera e lettori di schermo */
+.opzione input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.opzione span { display: inline-flex; align-items: center; min-height: 52px; padding: 14px 22px; border-radius: var(--raggio-pillola);
+                background: var(--bianco); box-shadow: var(--ombra); font-size: var(--testo-xl); }
+.opzione input:checked + span { background: var(--nero); color: var(--bianco); }
+.opzione input:focus-visible + span { outline: 3px solid var(--blu); outline-offset: 3px; }
+.avviso { min-height: 24px; margin: 20px 0 0; font-size: var(--testo-m); color: var(--rosso); }
+.comandi { display: flex; align-items: center; gap: 12px; margin-top: 28px; }
+#inizio .comandi { margin-top: 0; }
+.indietro { font: inherit; font-size: var(--testo-ml); border: 0; border-radius: var(--raggio-pillola); padding: 16px 24px; background: var(--bianco); box-shadow: var(--ombra); color: var(--nero); cursor: pointer; }
+#errore { margin-top: 72px; }
+#errore .come { font-size: var(--testo-m); color: var(--grigio-testo); }
+@media (prefers-reduced-motion: no-preference) {
+  .avanzamento span { transition: width .6s var(--molla); }
+  .opzione span { transition: background .2s, color .2s, transform .4s var(--molla); }
+  .opzione:hover span { transform: translateY(-2px); }
+  .opzione input:active + span { transform: scale(.96); }
+  #domanda > * { animation: entra .5s var(--molla) both; }   /* ogni domanda nuova entra con un piccolo rimbalzo */
+  @keyframes entra { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+}
+
+
+/* =========================================================
+   PAGINA DELLA CITTÀ (per ora solo un segnaposto)
+   ========================================================= */
+.testata-citta { margin-top: 72px; padding: 32px; border-radius: var(--raggio-grande); background: linear-gradient(130deg, var(--f1), var(--f2) 55%, var(--f3)); }
+.testata-citta h1 { font-size: var(--testo-meta-grande); line-height: .95; margin: 8px 0; }
+.in-arrivo { margin: 32px 0 16px; font-size: var(--testo-l); line-height: 1.5; color: var(--grigio-testo); }
+
+
+/* =========================================================
+   PAGINE "IN SVILUPPO" dei momenti 03–06 (le riempie js/navigazione.js)
+   ========================================================= */
+.in-sviluppo { margin-top: 80px; max-width: var(--larghezza-quiz); }
+.in-sviluppo h1 { margin: 20px 0 0; }
+.stato { display: inline-block; font-size: var(--testo-xs); font-weight: 700; letter-spacing: .02em; padding: 7px 14px; border-radius: var(--raggio-pillola);
+         background: var(--grigio-tenue); color: var(--grigio-testo); box-shadow: inset 0 0 0 1px var(--grigio-bordo); }   /* pillola "In sviluppo" */
+.cosa-conterra { font-size: var(--testo-3xl); line-height: 1.4; color: var(--grigio-testo); margin: 28px 0 40px; max-width: 760px; }
+.in-sviluppo .comandi { margin-top: 0; gap: 28px; }
+
+
+/* =========================================================
+   PIÈ DI PAGINA di tutte le pagine (lo scrive js/navigazione.js; la home ha una copia del suo stile)
+   ========================================================= */
+.piede-sito { border-top: 1px solid var(--grigio-bordo); padding: 20px 56px 24px; text-align: center; font-size: var(--testo-2xs); line-height: 1.5; color: var(--grigio-testo); }
+.piede-sito p { margin: 0; }
+.piede-sito .nota-dati { margin-bottom: 4px; }

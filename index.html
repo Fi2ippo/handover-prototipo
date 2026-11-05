@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>HANDOVER — Home</title>
+<link rel="icon" href="data:,">
+<style>
+  /* HOME — parte dalla bozza B ("il percorso è la mappa") in versione vetro liquido.
+     Bianco puro, Helvetica, un colore per ogni punto d'ingresso. Pochi testi, una sola interazione. */
+  :root {
+    --bianco: #FFFFFF;
+    --nero: #0A0A0A;
+    --grigio: #86868B;
+    --grigio-medio: #6E6E73;
+    --grigio-chiaro: #E8E8EA;
+    --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --molla: cubic-bezier(.34, 1.56, .64, 1);   /* movimento con un piccolo rimbalzo */
+    --morbido: cubic-bezier(.22, 1, .36, 1);    /* movimento che rallenta dolcemente */
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bianco); }
+  body { color: var(--nero); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  .pagina { width: 1440px; min-height: calc(100vh - 62px); margin: 0 auto; padding: 40px 96px 56px; }   /* 62px = il piè di pagina, visibile già nella prima schermata */
+
+  /* Piè di pagina (lo scrive js/navigazione.js): sottile, centrato, grigio. Stesso aspetto di css/stile.css → .piede-sito */
+  .piede-sito { border-top: 1px solid var(--grigio-chiaro); padding: 20px 96px 24px; text-align: center; font-size: 12px; line-height: 1.5; color: var(--grigio-medio); }
+
+  .marchio { font-size: 15px; font-weight: 700; letter-spacing: .12em; animation: appare .6s var(--morbido) both; }
+
+  h1 { margin-top: 104px; font-size: 112px; font-weight: 700; letter-spacing: -.045em; line-height: 1; }
+  h1 .parola { display: inline-block; animation: sale 1s var(--morbido) both; }
+  .presentazione { margin-top: 28px; max-width: 640px; font-size: 19px; line-height: 1.45; color: var(--grigio); animation: appare .9s .45s var(--morbido) both; }
+
+  /* ——— La scena: linea, anello, tappe, pallini e pillole di vetro ——— */
+  .scena { position: relative; width: 1248px; height: 240px; margin-top: 96px; }
+  .scena svg { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
+
+  .linea { fill: none; stroke: var(--grigio-chiaro); stroke-width: 2; stroke-dasharray: 1; animation: traccia 1.1s .5s var(--morbido) both; }
+  .anello { fill: none; stroke: var(--grigio-chiaro); stroke-width: 1.5; stroke-dasharray: 2 8; stroke-linecap: round; animation: appare 1s 1.4s both; }
+  .progresso { fill: none; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset .8s var(--morbido); }
+
+  .tappa-g { transform-box: fill-box; transform-origin: center; animation: spunta .6s var(--molla) both; }
+  .tappa { fill: var(--bianco); stroke: #C7C7CC; stroke-width: 2; transform-box: fill-box; transform-origin: center;
+           transition: fill .3s, stroke .3s, transform .5s var(--molla); }
+  .tappa.passata { stroke: var(--grigio-chiaro); }
+  .tappa.attiva { fill: var(--c); stroke: var(--c); transform: scale(1.5); }
+
+  .etichetta-tappa { position: absolute; top: 106px; transform: translateX(-50%); font-size: 13px; letter-spacing: .06em; color: var(--grigio); white-space: nowrap; font-variant-numeric: tabular-nums;
+                     animation: appare .8s both; transition: color .3s; }
+  .etichetta-tappa.passata { color: #D1D1D6; }
+  .etichetta-tappa.attiva { color: var(--nero); }
+
+  /* I pallini: uno per ogni punto d'ingresso, girano sul percorso */
+  .studente { position: absolute; left: 0; top: 0; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
+              background: var(--c); opacity: 0; transition: opacity .5s; will-change: transform; }
+  .scena.pronta .studente { opacity: 1; }
+  .scena.scelta .studente:not(.scelto) { opacity: .15; }
+
+  /* Le pillole di vetro: l'ancora è il punto sulla linea, la pillola si centra da sola sopra */
+  .ancora { position: absolute; width: 0; height: 0; display: flex; align-items: center; justify-content: center;
+            animation: cade 1s var(--molla) both; }
+  .vetro {
+    position: relative; flex-shrink: 0; display: flex; align-items: center; height: 50px; padding: 0 20px;
+    border-radius: 999px; color: var(--nero); text-decoration: none; font-size: 16px; font-weight: 500; white-space: nowrap;
+    background: rgba(255, 255, 255, .5);
+    -webkit-backdrop-filter: blur(9px) saturate(2) brightness(1.04);
+    backdrop-filter: blur(9px) saturate(2) brightness(1.04);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, .95),
+      inset 0 -1px 1px rgba(0, 0, 0, .05),
+      inset 0 0 0 1px rgba(0, 0, 0, .06),
+      0 12px 32px -10px rgba(0, 0, 0, .22),
+      0 2px 6px rgba(0, 0, 0, .05);
+    transition: scale .55s var(--molla), background .35s, box-shadow .35s, color .35s;
+  }
+  /* riflesso di luce che segue il mouse */
+  .vetro::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+    background: radial-gradient(80px circle at var(--lx, 50%) var(--ly, 0%), rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 70%);
+    opacity: 0; transition: opacity .3s; }
+  .vetro.attivo {
+    scale: 1.08;
+    background: color-mix(in srgb, var(--c) 8%, rgba(255, 255, 255, .4));
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, .95),
+      inset 0 0 0 1px color-mix(in srgb, var(--c) 25%, transparent),
+      0 18px 40px -12px color-mix(in srgb, var(--c) 60%, transparent),
+      0 2px 6px rgba(0, 0, 0, .05);
+  }
+  .vetro.attivo::after { opacity: .8; }
+  .scena.scelta .vetro:not(.attivo) { color: #B0B0B5; }
+  .vetro:focus-visible { outline: 2px solid var(--c); outline-offset: 5px; }
+  .freccia { display: inline-block; width: 0; opacity: 0; overflow: hidden; transition: width .45s var(--molla), margin .45s var(--molla), opacity .3s; }
+  .vetro.attivo .freccia { width: 18px; margin-left: 10px; opacity: 1; }
+
+  /* La riga che dice cosa troverai */
+  .anteprima { display: flex; align-items: center; gap: 14px; margin-top: 24px; height: 28px; font-size: 19px;
+               opacity: 0; transform: translateY(10px); transition: opacity .4s var(--morbido), transform .6s var(--morbido); }
+  .anteprima.visibile { opacity: 1; transform: none; }
+  .anteprima .punto { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+  .anteprima .momento { color: var(--grigio); }
+
+  @keyframes sale    { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+  @keyframes appare  { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes traccia { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes spunta  { from { transform: scale(0); } to { transform: scale(1); } }
+  @keyframes cade    { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: none; } }
+
+  /* Chi ha chiesto al sistema "meno movimento" vede tutto fermo */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; }
+  }
+</style>
+</head>
+<body>
+<div class="pagina">
+  <div class="marchio" id="marchio"></div>
+  <h1 id="domanda"></h1>
+  <p class="presentazione" id="presentazione"></p>
+
+  <div class="scena" id="scena">
+    <svg id="disegno" aria-hidden="true"></svg>
+  </div>
+
+  <p class="anteprima" id="anteprima" aria-live="polite"></p>
+</div>
+
+<!-- Piè di pagina: firma (e nota sui dati), la scrive js/navigazione.js -->
+<footer class="piede-sito" id="piede-sito"></footer>
+
+<!-- I link delle 6 tappe arrivano da js/navigazione.js (l'elenco unico dei momenti) -->
+<script src="js/navigazione.js"></script>
+<script src="dati/home.js"></script>
+<script>
+  const d = DATI_HOME;
+
+  // Un colore per ogni momento del percorso (è design, non contenuto: per questo sta qui e non nei dati)
+  const COLORI = { 1: "#2F6BFF", 2: "#0BB4D6", 3: "#F2A900", 4: "#FF5A36", 5: "#12B76A", 6: "#9B5CFF" };
+
+  // Geometria della scena (in pixel)
+  const Y = 70;                      // altezza della linea
+  const X1 = 100, XN = 1148;         // prima e ultima tappa
+  const FONDO = 150, LARGO = 140;    // quanto scende e quanto si allarga l'anello
+  const n = d.momenti.length;
+  const passo = (XN - X1) / (n - 1);
+  const x = m => X1 + (m - 1) * passo;
+  const momento = num => d.momenti.find(m => m.numero === num);
+  const MENO_MOVIMENTO = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ——— Testi ———
+  document.getElementById("marchio").textContent = d.nome;
+  document.getElementById("presentazione").textContent = d.presentazione;
+  document.getElementById("domanda").innerHTML = d.domanda.split(" ")
+    .map((p, k) => `<span class="parola" style="animation-delay:${k * 90}ms">${p}</span>`).join(" ");
+
+  // ——— Disegno: linea, anello di ritorno, tappe ———
+  const ritorno = `C ${x(n) + LARGO} ${Y}, ${x(n) + LARGO} ${Y + FONDO}, ${x(n) - 60} ${Y + FONDO}
+                   L ${x(1) + 60} ${Y + FONDO}
+                   C ${x(1) - LARGO} ${Y + FONDO}, ${x(1) - LARGO} ${Y}, ${x(1)} ${Y}`;
+  document.getElementById("disegno").innerHTML = `
+    <path class="anello" d="M ${x(n)} ${Y} ${ritorno}"/>
+    <path class="linea" pathLength="1" d="M ${x(1)} ${Y} L ${x(n)} ${Y}"/>
+    <path class="progresso" id="progresso" pathLength="1" d="M ${x(1)} ${Y} L ${x(n)} ${Y}"/>
+    <path id="giro" fill="none" d="M ${x(1)} ${Y} L ${x(n)} ${Y} ${ritorno}"/>
+    ${d.momenti.map((m, k) => `
+      <g class="tappa-g" style="animation-delay:${600 + k * 110}ms">
+        <circle class="tappa" data-momento="${m.numero}" cx="${x(m.numero)}" cy="${Y}" r="5"/>
+      </g>`).join("")}`;
+
+  const scena = document.getElementById("scena");
+  scena.insertAdjacentHTML("beforeend",
+    // numeri delle tappe, sotto le pillole
+    d.momenti.map((m, k) => `
+      <div class="etichetta-tappa" data-momento="${m.numero}" style="left:${x(m.numero)}px; animation-delay:${800 + k * 110}ms">${String(m.numero).padStart(2, "0")}</div>`).join("") +
+    // pallini, uno per momento
+    d.momenti.map(m => `<div class="studente" data-id="${m.numero}" style="--c:${COLORI[m.numero]}"></div>`).join("") +
+    // pillole di vetro: tutte e 6 le tappe sono cliccabili (link presi da MOMENTI, in js/navigazione.js)
+    d.momenti.map((m, k) => `
+      <div class="ancora" style="left:${x(m.numero)}px; top:${Y}px; animation-delay:${1200 + k * 100}ms">
+        <a class="vetro" href="${MOMENTI[m.numero - 1].pagina}" data-id="${m.numero}" style="--c:${COLORI[m.numero]}">
+          <span>${m.titolo}</span><span class="freccia" aria-hidden="true">→</span>
+        </a>
+      </div>`).join(""));
+  setTimeout(() => scena.classList.add("pronta"), MENO_MOVIMENTO ? 0 : 1700);
+
+  // Finita la caduta, tolgo l'animazione: finché resta attaccata, il vetro non "vede" cosa c'è dietro
+  scena.querySelectorAll(".ancora").forEach(a =>
+    a.addEventListener("animationend", () => { a.style.animation = "none"; }, { once: true }));
+
+  // ——— Interazione: passare sopra (o arrivare con il tab) su una tappa ———
+  const progresso = document.getElementById("progresso");
+  const anteprima = document.getElementById("anteprima");
+  let attivo = null;
+
+  function attiva(m) {
+    attivo = m;
+    scena.classList.toggle("scelta", !!m);
+    if (m) scena.style.setProperty("--c", COLORI[m.numero]);
+    scena.querySelectorAll(".vetro").forEach(v => v.classList.toggle("attivo", !!m && Number(v.dataset.id) === m.numero));
+    scena.querySelectorAll(".studente").forEach(s => s.classList.toggle("scelto", !!m && Number(s.dataset.id) === m.numero));
+    scena.querySelectorAll(".tappa, .etichetta-tappa").forEach(t => {
+      const k = Number(t.dataset.momento);
+      t.classList.toggle("passata", !!m && k < m.numero);
+      t.classList.toggle("attiva", !!m && k === m.numero);
+    });
+
+    if (!m) { progresso.style.strokeDashoffset = 1; anteprima.classList.remove("visibile"); return; }
+
+    // La strada che ti resta si colora. Dall'ultima tappa si accende invece l'anello: il racconto torna all'inizio.
+    progresso.style.transition = "none";
+    progresso.setAttribute("d", m.numero === n
+      ? `M ${x(n)} ${Y} ${ritorno}`
+      : `M ${x(m.numero)} ${Y} L ${x(n)} ${Y}`);
+    progresso.style.stroke = COLORI[m.numero];
+    progresso.style.strokeDashoffset = 1;
+    progresso.getBoundingClientRect();          // fa ripartire l'animazione da zero
+    progresso.style.transition = "";
+    progresso.style.strokeDashoffset = 0;
+
+    anteprima.style.setProperty("--c", COLORI[m.numero]);
+    anteprima.innerHTML = `<span class="punto"></span><span>${m.cosaTrovi}</span>`;
+    anteprima.classList.add("visibile");
+  }
+
+  scena.querySelectorAll(".vetro").forEach(v => {
+    const m = momento(Number(v.dataset.id));
+    v.addEventListener("mouseenter", () => attiva(m));
+    v.addEventListener("focus", () => attiva(m));
+    v.addEventListener("mouseleave", () => attiva(null));
+    v.addEventListener("blur", () => attiva(null));
+  });
+
+  // ——— Movimento continuo (60 volte al secondo) ———
+  const giro = document.getElementById("giro");
+  const lunghezza = giro.getTotalLength();
+  const DURATA_GIRO = 22000;   // millisecondi per fare un giro completo
+  const studenti = d.momenti.map((m, k) => ({
+    m, el: scena.querySelector(`.studente[data-id="${m.numero}"]`), fase: k / n, presa: 0
+  }));
+  const vetri = [...scena.querySelectorAll(".vetro")].map(el => ({ el, id: el.dataset.id, ox: 0, oy: 0 }));
+  const mouse = { x: -9999, y: -9999 };
+  addEventListener("mousemove", e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+  function anima(ora) {
+    const s0 = scena.getBoundingClientRect();
+
+    // Pillole: si lasciano "attirare" un poco dal mouse, e il riflesso segue il puntatore
+    for (const v of vetri) {
+      const r = v.el.getBoundingClientRect();
+      const cx = r.left + r.width / 2 - v.ox, cy = r.top + r.height / 2 - v.oy;
+      const dx = mouse.x - cx, dy = mouse.y - cy;
+      const vicino = !MENO_MOVIMENTO && Math.hypot(dx, dy) < 170;
+      const tx = vicino ? Math.max(-14, Math.min(14, dx * .12)) : 0;
+      const ty = vicino ? Math.max(-10, Math.min(10, dy * .18)) : 0;
+      v.ox += (tx - v.ox) * .15;
+      v.oy += (ty - v.oy) * .15;
+      v.el.style.translate = `${v.ox}px ${v.oy}px`;
+      v.el.style.setProperty("--lx", `${(mouse.x - r.left) / r.width * 100}%`);
+      v.el.style.setProperty("--ly", `${(mouse.y - r.top) / r.height * 100}%`);
+      v.r = r;
+    }
+
+    // Pallini: girano sul percorso; quello della risposta scelta vola al centro della sua pillola,
+    // si ingrandisce e, visto attraverso il vetro, la illumina da dentro
+    const giri = MENO_MOVIMENTO ? 0 : ora / DURATA_GIRO;
+    for (const s of studenti) {
+      const p = giro.getPointAtLength(((giri + s.fase) % 1) * lunghezza);
+      s.presa += ((attivo === s.m ? 1 : 0) - s.presa) * .1;
+      const r = vetri.find(v => Number(v.id) === s.m.numero).r;
+      const meta = { x: r.left - s0.left + r.width / 2, y: r.top - s0.top + r.height / 2 };
+      const px = p.x + (meta.x - p.x) * s.presa;
+      const py = p.y + (meta.y - p.y) * s.presa;
+      s.el.style.transform = `translate(${px}px, ${py}px) scale(${1 + s.presa * 2.2})`;
+    }
+    requestAnimationFrame(anima);
+  }
+  requestAnimationFrame(anima);
+</script>
+</body>
+</html>

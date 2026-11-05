@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HANDOVER — Quale fa per me?</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/stile.css">
+</head>
+<body>
+<div class="pagina risultati">
+  <header>
+    <!-- La barra dei momenti: la disegna js/navigazione.js (uguale in tutte le pagine) -->
+    <nav id="barra-momenti"></nav>
+    <script src="js/navigazione.js"></script>
+  </header>
+
+  <main>
+  <!-- Se i dati in /dati non si caricano (es. pagina aperta con doppio clic) compare questo messaggio -->
+  <div class="errore" id="errore" role="alert" hidden>
+    <p>Non riesco a caricare le domande. Apri il sito con Live Server.</p>
+    <p class="come">In VS Code: tasto destro su <code>quale-fa-per-me.html</code> → <i>Open with Live Server</i>.</p>
+  </div>
+
+  <!-- SCHERMATA 1: INIZIO -->
+  <section id="inizio" aria-labelledby="t-inizio" hidden>
+    <h1 id="t-inizio" tabindex="-1">Quale fa<br>per me?</h1>
+    <p class="presenta" id="presenta"></p>
+    <div class="comandi">
+      <button type="button" class="vai" id="inizia">Inizia <span aria-hidden="true">→</span></button>
+      <!-- Modalità demo: compila le risposte di prova (quiz.json → risposteDiProva) e mostra subito i risultati -->
+      <button type="button" class="indietro" id="esempio">Prova con un esempio</button>
+    </div>
+  </section>
+
+  <!-- SCHERMATA 2: IL QUIZ, una domanda alla volta (domande e risposte da dati/quiz.json) -->
+  <form class="quiz" id="quiz" novalidate hidden>
+    <p class="occhiello" id="contatore"></p>
+    <div class="avanzamento" aria-hidden="true"><span id="riempi"></span></div>
+    <fieldset id="domanda"></fieldset>
+    <p class="avviso" id="avviso" role="alert"></p>
+    <div class="comandi">
+      <button type="button" class="indietro" id="indietro"><span aria-hidden="true">←</span> Indietro</button>
+      <button type="submit" class="vai" id="avanti"></button>
+    </div>
+  </form>
+
+  <!-- SCHERMATA 3: I RISULTATI -->
+  <div id="risultati" hidden>
+    <h1 id="t-risultati" tabindex="-1">Il tuo Erasmus,<br>meta per meta.</h1>
+    <!-- Le risposte del quiz, in pillole (generate dal codice) -->
+    <div class="profilo" id="profilo" aria-label="Le tue risposte"></div>
+
+    <!-- CONSIGLIATA: la meta migliore tra quelle che non hai salvato (compare solo se batte le tue) -->
+    <section class="sez" id="sez-consigliata" aria-labelledby="t-cons" hidden>
+      <p class="occhiello">CONSIGLIATA PER TE</p>
+      <h2 id="t-cons"></h2>
+      <article class="scheda consigliata" id="consigliata"></article>
+    </section>
+
+    <!-- CONFRONTO: le mete salvate nel momento 01, in ordine di affinità. Ogni scheda porta a citta.html?id=… -->
+    <section class="sez" id="sez-confronto" aria-labelledby="t-mie">
+      <p class="occhiello">LE TUE METE A CONFRONTO</p>
+      <h2 id="t-mie"></h2>
+      <!-- Legenda degli esiti, scritta dal codice (solo per chi vede: chi usa un lettore di schermo sente già "per te: sì") -->
+      <div class="legenda-esiti" id="legenda" aria-hidden="true"></div>
+      <div class="griglia" id="griglia"></div>
+    </section>
+
+    <div class="barra">
+      <div><p class="occhiello">LE TUE PREFERITE</p><p class="lista" id="lista" aria-live="polite">Tocca il cuore su una meta</p></div>
+      <a class="vai" id="vai" href="candidatura.html" aria-disabled="true">Porta le preferite in candidatura <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+  </main>
+</div>
+
+<!-- Piè di pagina: firma (e nota sui dati), la scrive js/navigazione.js -->
+<footer class="piede-sito" id="piede-sito" data-dati-fittizi></footer>
+
+<!-- Il codice della pagina:
+     risultati.js = calcola i giudizi e disegna le schede
+     quiz.js      = carica i dati da /dati, mostra le domande, salva le risposte e decide quale schermata vedi -->
+<script src="js/risultati.js"></script>
+<script src="js/quiz.js"></script>
+</body>
+</html>

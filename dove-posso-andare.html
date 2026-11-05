@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HANDOVER — Dove posso andare?</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/stile.css">
+</head>
+<body>
+<div class="pagina">
+  <header>
+    <!-- La barra dei momenti: la disegna js/navigazione.js (uguale in tutte le pagine) -->
+    <nav id="barra-momenti"></nav>
+    <script src="js/navigazione.js"></script>
+  </header>
+
+  <h1>Dove posso<br>andare?</h1>
+  <div id="stato" aria-live="polite"></div>
+
+  <div class="area" id="area">
+    <!-- La mappa: si trascina, si ingrandisce con rotellina/trackpad, e con la tastiera quando ha il focus -->
+    <div class="tela" id="tela">
+      <div class="quadro" id="quadro" tabindex="0" role="region" aria-roledescription="mappa"
+           aria-label="Mappa. Usa le frecce per spostarti e i tasti più e meno per ingrandire o rimpicciolire.">
+        <svg id="mappa" aria-hidden="true"></svg>
+        <div class="segnaposti" id="segnaposti"></div>
+        <div class="legenda" id="legenda" aria-hidden="true"></div>
+        <div class="controlli">
+          <button type="button" class="controllo" id="zoom-piu" aria-label="Ingrandisci la mappa">+</button>
+          <button type="button" class="controllo" id="zoom-meno" aria-label="Rimpicciolisci la mappa">−</button>
+          <button type="button" class="controllo centra" id="centra" aria-label="Centra la mappa">Centra</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- La scheda: colonna a destra, alta come la mappa, non scorre mai. Si chiude e resta una linguetta. -->
+    <aside class="colonna" id="colonna" aria-label="Scheda">
+      <button type="button" class="chiudi-scheda" id="chiudi-scheda" aria-label="Chiudi la scheda" aria-controls="colonna" aria-expanded="true"><span aria-hidden="true">×</span></button>
+      <div class="box" id="box"></div>
+    </aside>
+    <button type="button" class="linguetta" id="apri-scheda" aria-label="Apri la scheda" aria-controls="colonna" aria-expanded="false">Apri scheda</button>
+  </div>
+
+  <section class="elenco" aria-labelledby="titolo-elenco">
+    <div class="elenco-testa">
+      <h2 id="titolo-elenco">Tutte le mete</h2>
+      <div class="ordina" id="ordina" role="group" aria-label="Ordina le mete">
+        <button type="button" data-o="vicine" aria-pressed="true">Più vicine</button>
+        <button type="button" data-o="racconti" aria-pressed="false">Più raccontate</button>
+        <button type="button" data-o="economiche" aria-pressed="false">Più economiche</button>
+        <button type="button" data-o="convalide" aria-pressed="false">Più convalide</button>
+      </div>
+    </div>
+    <div id="tabella-box"></div>
+  </section>
+
+  <p class="nota">Nella versione reale i dati arriveranno dai bandi delle università, da ESN e dai racconti degli studenti. Distanze in linea d'aria.</p>
+</div>
+
+<!-- Piè di pagina: firma (e nota sui dati), la scrive js/navigazione.js -->
+<footer class="piede-sito" id="piede-sito" data-dati-fittizi></footer>
+
+<!-- Librerie per disegnare la mappa (servono internet) -->
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<!-- Il codice della pagina: carica i dati da /dati e fa funzionare la mappa -->
+<script src="js/mappa.js"></script>
+</body>
+</html>

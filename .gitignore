@@ -1,0 +1,11 @@
+# File che NON vanno su GitHub (restano solo su questo computer)
+
+# Vecchie versioni, bozze e riferimenti: il sito non li usa
+/archivio/
+
+# Istruzioni di lavoro del progetto (non fanno parte del sito)
+/CLAUDE.md
+
+# File nascosti del Mac e cartelle di strumenti
+.DS_Store
+node_modules/

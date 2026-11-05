@@ -1,0 +1,46 @@
+{
+  "nota": "Dati fittizi, solo per provare l'interfaccia. costiBase in euro: stanza al mese, un pasto, un caffè. lezioniInInglese va da 1 a 4 (vedi livelliLezioni; {lingua} viene sostituito con la lingua del paese). idMappa è il codice numerico ISO usato dalla mappa.",
+  "livelliLezioni": {
+    "1": "Quasi solo in {lingua}",
+    "2": "Alcuni corsi in inglese",
+    "3": "Molti corsi in inglese",
+    "4": "In inglese"
+  },
+  "altriPaesiErasmus": [
+    {"nome": "Macedonia del Nord", "idMappa": "807"},
+    {"nome": "Serbia", "idMappa": "688"},
+    {"nome": "Liechtenstein", "idMappa": "438"}
+  ],
+  "paesi": [
+    {"codice": "IT", "nome": "Italia", "idMappa": "380", "lingua": "Italiano", "lezioniInInglese": 1, "coloriBandiera": ["#009246", "#FFFFFF", "#CE2B37"], "costiBase": {"stanza": 500, "pasto": 14, "caffe": 1.4}},
+    {"codice": "ES", "nome": "Spagna", "idMappa": "724", "lingua": "Spagnolo", "lezioniInInglese": 1, "coloriBandiera": ["#AA151B", "#F1BF00", "#AA151B"], "costiBase": {"stanza": 400, "pasto": 12, "caffe": 1.8}},
+    {"codice": "PT", "nome": "Portogallo", "idMappa": "620", "lingua": "Portoghese", "lezioniInInglese": 1, "coloriBandiera": ["#006600", "#FF0000", "#FFE000"], "costiBase": {"stanza": 450, "pasto": 10, "caffe": 1.2}},
+    {"codice": "FR", "nome": "Francia", "idMappa": "250", "lingua": "Francese", "lezioniInInglese": 1, "coloriBandiera": ["#0055A4", "#FFFFFF", "#EF4135"], "costiBase": {"stanza": 600, "pasto": 15, "caffe": 2.5}},
+    {"codice": "DE", "nome": "Germania", "idMappa": "276", "lingua": "Tedesco", "lezioniInInglese": 2, "coloriBandiera": ["#000000", "#DD0000", "#FFCE00"], "costiBase": {"stanza": 550, "pasto": 14, "caffe": 3.2}},
+    {"codice": "NL", "nome": "Paesi Bassi", "idMappa": "528", "lingua": "Olandese", "lezioniInInglese": 3, "coloriBandiera": ["#AE1C28", "#FFFFFF", "#21468B"], "costiBase": {"stanza": 750, "pasto": 18, "caffe": 3.5}},
+    {"codice": "BE", "nome": "Belgio", "idMappa": "056", "lingua": "Francese e olandese", "lezioniInInglese": 2, "coloriBandiera": ["#000000", "#FDDA24", "#EF3340"], "costiBase": {"stanza": 550, "pasto": 16, "caffe": 3}},
+    {"codice": "AT", "nome": "Austria", "idMappa": "040", "lingua": "Tedesco", "lezioniInInglese": 2, "coloriBandiera": ["#ED2939", "#FFFFFF", "#ED2939"], "costiBase": {"stanza": 550, "pasto": 15, "caffe": 3.5}},
+    {"codice": "PL", "nome": "Polonia", "idMappa": "616", "lingua": "Polacco", "lezioniInInglese": 2, "coloriBandiera": ["#FFFFFF", "#FFFFFF", "#DC143C"], "costiBase": {"stanza": 400, "pasto": 9, "caffe": 2.5}},
+    {"codice": "CZ", "nome": "Cechia", "idMappa": "203", "lingua": "Ceco", "lezioniInInglese": 2, "coloriBandiera": ["#11457E", "#FFFFFF", "#D7141A"], "costiBase": {"stanza": 450, "pasto": 9, "caffe": 2.5}},
+    {"codice": "HU", "nome": "Ungheria", "idMappa": "348", "lingua": "Ungherese", "lezioniInInglese": 2, "coloriBandiera": ["#CE2939", "#FFFFFF", "#477050"], "costiBase": {"stanza": 400, "pasto": 9, "caffe": 2}},
+    {"codice": "GR", "nome": "Grecia", "idMappa": "300", "lingua": "Greco", "lezioniInInglese": 1, "coloriBandiera": ["#0D5EAF", "#FFFFFF", "#0D5EAF"], "costiBase": {"stanza": 350, "pasto": 12, "caffe": 3.5}},
+    {"codice": "SE", "nome": "Svezia", "idMappa": "752", "lingua": "Svedese", "lezioniInInglese": 3, "coloriBandiera": ["#006AA7", "#FECC00", "#006AA7"], "costiBase": {"stanza": 600, "pasto": 14, "caffe": 4}},
+    {"codice": "DK", "nome": "Danimarca", "idMappa": "208", "lingua": "Danese", "lezioniInInglese": 3, "coloriBandiera": ["#C8102E", "#FFFFFF", "#C8102E"], "costiBase": {"stanza": 700, "pasto": 20, "caffe": 5}},
+    {"codice": "FI", "nome": "Finlandia", "idMappa": "246", "lingua": "Finlandese", "lezioniInInglese": 3, "coloriBandiera": ["#FFFFFF", "#002F6C", "#FFFFFF"], "costiBase": {"stanza": 500, "pasto": 13, "caffe": 4}},
+    {"codice": "NO", "nome": "Norvegia", "idMappa": "578", "lingua": "Norvegese", "lezioniInInglese": 3, "coloriBandiera": ["#BA0C2F", "#FFFFFF", "#00205B"], "costiBase": {"stanza": 700, "pasto": 20, "caffe": 5}},
+    {"codice": "IE", "nome": "Irlanda", "idMappa": "372", "lingua": "Inglese", "lezioniInInglese": 4, "coloriBandiera": ["#169B62", "#FFFFFF", "#FF883E"], "costiBase": {"stanza": 900, "pasto": 18, "caffe": 3.8}},
+    {"codice": "SI", "nome": "Slovenia", "idMappa": "705", "lingua": "Sloveno", "lezioniInInglese": 2, "coloriBandiera": ["#FFFFFF", "#0000FF", "#FF0000"], "costiBase": {"stanza": 400, "pasto": 10, "caffe": 1.6}},
+    {"codice": "HR", "nome": "Croazia", "idMappa": "191", "lingua": "Croato", "lezioniInInglese": 1, "coloriBandiera": ["#FF0000", "#FFFFFF", "#171796"], "costiBase": {"stanza": 400, "pasto": 11, "caffe": 2}},
+    {"codice": "RO", "nome": "Romania", "idMappa": "642", "lingua": "Rumeno", "lezioniInInglese": 1, "coloriBandiera": ["#002B7F", "#FCD116", "#CE1126"], "costiBase": {"stanza": 300, "pasto": 8, "caffe": 2}},
+    {"codice": "BG", "nome": "Bulgaria", "idMappa": "100", "lingua": "Bulgaro", "lezioniInInglese": 1, "coloriBandiera": ["#FFFFFF", "#00966E", "#D62612"], "costiBase": {"stanza": 280, "pasto": 7, "caffe": 1.5}},
+    {"codice": "EE", "nome": "Estonia", "idMappa": "233", "lingua": "Estone", "lezioniInInglese": 3, "coloriBandiera": ["#0072CE", "#000000", "#FFFFFF"], "costiBase": {"stanza": 400, "pasto": 12, "caffe": 3}},
+    {"codice": "LV", "nome": "Lettonia", "idMappa": "428", "lingua": "Lettone", "lezioniInInglese": 2, "coloriBandiera": ["#9E3039", "#FFFFFF", "#9E3039"], "costiBase": {"stanza": 350, "pasto": 11, "caffe": 3}},
+    {"codice": "LT", "nome": "Lituania", "idMappa": "440", "lingua": "Lituano", "lezioniInInglese": 2, "coloriBandiera": ["#FDB913", "#006A44", "#C1272D"], "costiBase": {"stanza": 350, "pasto": 10, "caffe": 2.8}},
+    {"codice": "SK", "nome": "Slovacchia", "idMappa": "703", "lingua": "Slovacco", "lezioniInInglese": 1, "coloriBandiera": ["#FFFFFF", "#0B4EA2", "#EE1C25"], "costiBase": {"stanza": 400, "pasto": 9, "caffe": 2.2}},
+    {"codice": "MT", "nome": "Malta", "idMappa": "470", "lingua": "Inglese e maltese", "lezioniInInglese": 4, "coloriBandiera": ["#FFFFFF", "#FFFFFF", "#CF142B"], "costiBase": {"stanza": 550, "pasto": 14, "caffe": 2.2}},
+    {"codice": "CY", "nome": "Cipro", "idMappa": "196", "lingua": "Greco", "lezioniInInglese": 2, "coloriBandiera": ["#FFFFFF", "#D57800", "#FFFFFF"], "costiBase": {"stanza": 450, "pasto": 14, "caffe": 3.5}},
+    {"codice": "IS", "nome": "Islanda", "idMappa": "352", "lingua": "Islandese", "lezioniInInglese": 3, "coloriBandiera": ["#02529C", "#FFFFFF", "#DC1E35"], "costiBase": {"stanza": 800, "pasto": 25, "caffe": 5.5}},
+    {"codice": "TR", "nome": "Turchia", "idMappa": "792", "lingua": "Turco", "lezioniInInglese": 2, "coloriBandiera": ["#E30A17", "#FFFFFF", "#E30A17"], "costiBase": {"stanza": 250, "pasto": 6, "caffe": 2.5}},
+    {"codice": "LU", "nome": "Lussemburgo", "idMappa": "442", "lingua": "Francese e tedesco", "lezioniInInglese": 2, "coloriBandiera": ["#EF3340", "#FFFFFF", "#00A3E0"], "costiBase": {"stanza": 800, "pasto": 18, "caffe": 3.5}}
+  ]
+}

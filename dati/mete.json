@@ -1,0 +1,101 @@
+{
+  "nota": "Dati fittizi, solo per provare l'interfaccia. costoMese = costo totale al mese raccontato dagli studenti (€). stanza.ufficiale = come nel momento 01 (costo base del paese × indice della città); stanza.raccontata non ancora raccolta. lezioniInInglese: livello 1–4 (vedi paesi.json). esamiRiconosciuti: su 10. attivita: id delle attività (vedi quiz.json). frasi: pezzi di frase per 'In breve', per voce e per giudizio (si / medio / no). mesi: temperatura = media delle massime in °C, luce = ore di luce del giorno (valori approssimati); daSapere tra [parentesi] = segnaposto da raccogliere; importante = la nota da mostrare se il mese è nel tuo semestre.",
+  "mete": [
+    {
+      "id": "valencia", "citta": "Valencia", "paese": "ES", "universita": "Universitat de València",
+      "costoMese": 780, "stanza": { "ufficiale": 400, "raccontata": null },
+      "lezioniInInglese": 2, "esamiRiconosciuti": 7, "attivita": ["mare", "uscire"], "racconti": 8,
+      "frasi": {
+        "costo": { "si": "rientra nel budget" },
+        "esami": { "si": "riconosce quasi tutti gli esami" },
+        "vita":  { "si": "ha il mare in città" }
+      },
+      "mesi": [
+        { "mese": "gennaio",   "temperatura": 16, "luce": 10,   "daSapere": "[da sapere a gennaio]" },
+        { "mese": "febbraio",  "temperatura": 17, "luce": 10.5, "daSapere": "[da sapere a febbraio]" },
+        { "mese": "marzo",     "temperatura": 19, "luce": 12,   "daSapere": "[da sapere a marzo]" },
+        { "mese": "aprile",    "temperatura": 21, "luce": 13,   "daSapere": "[da sapere ad aprile]" },
+        { "mese": "maggio",    "temperatura": 24, "luce": 14,   "daSapere": "[da sapere a maggio]" },
+        { "mese": "giugno",    "temperatura": 28, "luce": 15,   "daSapere": "[da sapere a giugno]" },
+        { "mese": "luglio",    "temperatura": 30, "luce": 14.5, "daSapere": "[da sapere a luglio]" },
+        { "mese": "agosto",    "temperatura": 31, "luce": 13.5, "daSapere": "[da sapere ad agosto]" },
+        { "mese": "settembre", "temperatura": 28, "luce": 12.5, "daSapere": "Bagno fino a ottobre", "importante": true },
+        { "mese": "ottobre",   "temperatura": 25, "luce": 11,   "daSapere": "[da sapere a ottobre]" },
+        { "mese": "novembre",  "temperatura": 20, "luce": 10,   "daSapere": "[da sapere a novembre]" },
+        { "mese": "dicembre",  "temperatura": 17, "luce": 10,   "daSapere": "[da sapere a dicembre]" }
+      ]
+    },
+    {
+      "id": "lisbona", "citta": "Lisbona", "paese": "PT", "universita": "Universidade de Lisboa",
+      "costoMese": 1000, "stanza": { "ufficiale": 540, "raccontata": null },
+      "lezioniInInglese": 2, "esamiRiconosciuti": 8, "attivita": ["mare", "uscire"], "racconti": 5,
+      "frasi": {
+        "costo": { "no": "la casa costa cara" },
+        "vita":  { "si": "mare e vita sociale come vuoi" }
+      },
+      "mesi": [
+        { "mese": "gennaio",   "temperatura": 15, "luce": 10,   "daSapere": "[da sapere a gennaio]" },
+        { "mese": "febbraio",  "temperatura": 16, "luce": 10.5, "daSapere": "[da sapere a febbraio]" },
+        { "mese": "marzo",     "temperatura": 19, "luce": 12,   "daSapere": "[da sapere a marzo]" },
+        { "mese": "aprile",    "temperatura": 20, "luce": 13,   "daSapere": "[da sapere ad aprile]" },
+        { "mese": "maggio",    "temperatura": 22, "luce": 14,   "daSapere": "[da sapere a maggio]" },
+        { "mese": "giugno",    "temperatura": 26, "luce": 15,   "daSapere": "[da sapere a giugno]" },
+        { "mese": "luglio",    "temperatura": 28, "luce": 14.5, "daSapere": "[da sapere a luglio]" },
+        { "mese": "agosto",    "temperatura": 29, "luce": 13.5, "daSapere": "[da sapere ad agosto]" },
+        { "mese": "settembre", "temperatura": 27, "luce": 12.5, "daSapere": "[da sapere a settembre]" },
+        { "mese": "ottobre",   "temperatura": 23, "luce": 11,   "daSapere": "[da sapere a ottobre]" },
+        { "mese": "novembre",  "temperatura": 18, "luce": 10,   "daSapere": "Pioggia da novembre", "importante": true },
+        { "mese": "dicembre",  "temperatura": 15, "luce": 9.5,  "daSapere": "[da sapere a dicembre]" }
+      ]
+    },
+    {
+      "id": "praga", "citta": "Praga", "paese": "CZ", "universita": "Univerzita Karlova",
+      "costoMese": 780, "stanza": { "ufficiale": 520, "raccontata": null },
+      "lezioniInInglese": 3, "esamiRiconosciuti": 7, "attivita": ["uscire"], "racconti": 6,
+      "frasi": {
+        "costo":   { "si": "nel budget" },
+        "lezioni": { "si": "piena di corsi in inglese" },
+        "vita":    { "medio": "niente mare" },
+        "clima":   { "no": "inverno freddo" }
+      },
+      "mesi": [
+        { "mese": "gennaio",   "temperatura": 1,  "luce": 8.5,  "daSapere": "[da sapere a gennaio]" },
+        { "mese": "febbraio",  "temperatura": 3,  "luce": 10,   "daSapere": "[da sapere a febbraio]" },
+        { "mese": "marzo",     "temperatura": 8,  "luce": 12,   "daSapere": "[da sapere a marzo]" },
+        { "mese": "aprile",    "temperatura": 14, "luce": 13.5, "daSapere": "[da sapere ad aprile]" },
+        { "mese": "maggio",    "temperatura": 19, "luce": 15.5, "daSapere": "[da sapere a maggio]" },
+        { "mese": "giugno",    "temperatura": 22, "luce": 16,   "daSapere": "[da sapere a giugno]" },
+        { "mese": "luglio",    "temperatura": 24, "luce": 16,   "daSapere": "[da sapere a luglio]" },
+        { "mese": "agosto",    "temperatura": 24, "luce": 14.5, "daSapere": "[da sapere ad agosto]" },
+        { "mese": "settembre", "temperatura": 19, "luce": 12.5, "daSapere": "[da sapere a settembre]" },
+        { "mese": "ottobre",   "temperatura": 13, "luce": 11,   "daSapere": "[da sapere a ottobre]" },
+        { "mese": "novembre",  "temperatura": 6,  "luce": 9,    "daSapere": "[da sapere a novembre]" },
+        { "mese": "dicembre",  "temperatura": 2,  "luce": 8,    "daSapere": "Mercatini di Natale", "importante": true }
+      ]
+    },
+    {
+      "id": "berlino", "citta": "Berlino", "paese": "DE", "universita": "Humboldt-Universität zu Berlin",
+      "costoMese": 1080, "stanza": { "ufficiale": 630, "raccontata": null },
+      "lezioniInInglese": 3, "esamiRiconosciuti": 9, "attivita": ["uscire"], "racconti": 7,
+      "frasi": {
+        "costo": { "no": "supera il budget" },
+        "esami": { "si": "ottima per gli esami" },
+        "clima": { "no": "è buia d'inverno" }
+      },
+      "mesi": [
+        { "mese": "gennaio",   "temperatura": 3,  "luce": 8,    "daSapere": "[da sapere a gennaio]" },
+        { "mese": "febbraio",  "temperatura": 4,  "luce": 9.5,  "daSapere": "[da sapere a febbraio]" },
+        { "mese": "marzo",     "temperatura": 9,  "luce": 12,   "daSapere": "[da sapere a marzo]" },
+        { "mese": "aprile",    "temperatura": 14, "luce": 13.5, "daSapere": "[da sapere ad aprile]" },
+        { "mese": "maggio",    "temperatura": 19, "luce": 15.5, "daSapere": "[da sapere a maggio]" },
+        { "mese": "giugno",    "temperatura": 22, "luce": 16.5, "daSapere": "[da sapere a giugno]" },
+        { "mese": "luglio",    "temperatura": 25, "luce": 16.5, "daSapere": "[da sapere a luglio]" },
+        { "mese": "agosto",    "temperatura": 24, "luce": 14.5, "daSapere": "[da sapere ad agosto]" },
+        { "mese": "settembre", "temperatura": 19, "luce": 12.5, "daSapere": "[da sapere a settembre]" },
+        { "mese": "ottobre",   "temperatura": 14, "luce": 10.5, "daSapere": "[da sapere a ottobre]" },
+        { "mese": "novembre",  "temperatura": 8,  "luce": 8.5,  "daSapere": "[da sapere a novembre]" },
+        { "mese": "dicembre",  "temperatura": 4,  "luce": 7.5,  "daSapere": "Buio verso le 16", "importante": true }
+      ]
+    }
+  ]
+}
